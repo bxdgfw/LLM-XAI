@@ -12,7 +12,7 @@ import pandas as pd
 from llm2ebm import feature_importances_to_text
 import t2ebm
 from tool import forecast_tool,Final_answer,python_tool
-
+from graph_desc import llm2graph_desc
 
 #用md语法表示的图的字符串生成图
 def md2img(text):
@@ -47,13 +47,13 @@ def ebm_agent(llm,ebm,df = None,dataset_description = None,y_axis_description = 
     for feature_index in range(len(ebm.feature_names_in_)):       #获取ebm中的所有graph
         graphs.append(t2ebm.graphs.extract_graph(ebm, feature_index))
     graphs = [t2ebm.graphs.graph_to_text(graph) for graph in graphs]
-    '''graph_descriptions = [llm2graph_desc(llm,ebm,idx,dataset_description=dataset_description,y_axis_description=y_axis_description) for idx in range(len(ebm.feature_names_in_)) ]
+    graph_descriptions = [llm2graph_desc(llm,ebm,idx,dataset_description=dataset_description,y_axis_description=y_axis_description) for idx in range(len(ebm.feature_names_in_)) ]
     graph_descriptions = "\n\n".join(
         [
             ebm.feature_names_in_[idx] + ": " + graph_description
             for idx, graph_description in enumerate(graph_descriptions)
         ]
-    )'''
+    )
 
     #prompt template
     prefix = """You are an expert statistician and data scientist.
@@ -79,17 +79,22 @@ def ebm_agent(llm,ebm,df = None,dataset_description = None,y_axis_description = 
         suffix += "\n" + y_axis_description           
     
     suffix += "\nHere are the global feature importances. Be sure not to provide these importances for the tool directly for prediction. The input list of the Forecast tool must include and only include the features included below:\n\n" + feature_importances 
-    #suffix += "\nHere are the descriptions of the different graphs.\n\n"
-    #suffix += graph_descriptions
+    suffix += "\nHere are the descriptions of the different graphs.\n\n"
+    suffix += graph_descriptions
     suffix+="""
     If you need to use the Python_REPL tool, you must comply with the following regulations:
         If you get an error, debug your code and try again.
         You might know the answer without running any code, but you should still run the code to get the answer.
         If it does not seem like you can write code to answer the question, just return "I don't know" as the answer.
-        You must save the generated image through code before you show it. In other words,You can't use 'plt.show()' 
-        Your Final Answer must start with the entire executed code, and then print the image information in the form of a string in the format of '![image description](image address, which can be a local link)'.
-
+        You have to use altair library to plot charts. Don't save it and show the chart using the function chart.display() instead of chart.show().
+        You can also add some required interactivity to the chart.
+        When you update or modify the chart, you must make modifications on the original chart, which means that the existing parts of the original chart cannot be changed.
+        
     Complete the objective as best you can. You have access to the following tools:"""
+    """
+    You must save the generated image through code before you show it. In other words, You can't use 'plt.show()' .
+    Your Final Answer must start with the entire executed code, and then print the image information in the form of a string in the format of '![image description](image address, which can be a local link)'.
+    """
     prefix = prefix + suffix
 
     suffix_no_df = """The Action must contain only the name of one tool, no extra words needed to form a sentence.

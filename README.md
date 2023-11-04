@@ -23,7 +23,7 @@ First, you can ask the agent to tell you the overall situation of the model and 
 agent.run("Summarize the entire model, introduce and describe several features that have a greater impact on the prediction results.")
 ```
 
-> agent:
+> **agent:**
 >
 > The Generalized Additive Model (GAM) is used to predict whether a passenger was transported to an alternate dimension during the Spaceship Titanic's collision with the spacetime anomaly. The model uses several features from the passenger's personal records, and each feature contributes differently to the prediction. 
 >
@@ -53,7 +53,7 @@ Finally, after understanding the contribution of each feature, you can let the a
 agent.run("Use the seventh to ninth rows of data in the dataframe as prediction samples and tell me the prediction results of each row.")
 ```
 
-> agent:
+> **agent:**
 > 
 > The prediction for the seventh row is that the passenger was likely transported to an alternate dimension, with a probability of approximately 0.9494. The prediction for the eighth row is also that the passenger was likely transported to an alternate dimension, with a probability of approximately 0.9302. The prediction for the ninth row is the same, with a probability of approximately 0.9503.
 

@@ -37,15 +37,13 @@ You now know several features with relatively large contributions, and then you 
 agent.run("visualize the importance of each feature.")
 ```
 
-![](pictures\feature_importance.png)
-
-
+<img src="images/feature_importance.png">
 
 ```python
 agent.run("Add a polyline to the previously generated chart to represent the changing trend of the importance of each feature.")
 ```
 
-![](pictures\modified_feature.png)
+<img src="images/modified_feature.png">
 
 
 

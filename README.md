@@ -37,7 +37,7 @@ You now know several features with relatively large contributions, and then you 
 agent.run("visualize the importance of each feature.")
 ```
 
-![](pictures\feature importance.png)
+![](pictures\feature_importance.png)
 
 
 
@@ -45,7 +45,9 @@ agent.run("visualize the importance of each feature.")
 agent.run("Add a polyline to the previously generated chart to represent the changing trend of the importance of each feature.")
 ```
 
-![](pictures\modified feature.png)
+![](pictures\modified_feature.png)
+
+
 
 Finally, after understanding the contribution of each feature, you can let the agent make actual predictions, that is, get the prediction results and probability of the specific data in the file through EBM.
 

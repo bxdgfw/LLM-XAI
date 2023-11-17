@@ -4,14 +4,13 @@ import numpy as np
 
 
 
-desc = (
+forecast_desc = (
     "use this tool when you need to predict the probabilities given a series of feature values in a Generalized Additive Model."
     "It will return the prediction result and probability. Your final answer must begin with the results returned and your thoughts about it,"
     " plus a conclusion based on the combination of the results returned and the description of the data set. To use the tool you must input "
-    "a list consisting of the value of each feature. The value must be provided in question. For example, the question is if a person's  WorkClass is Private"
-    ", a person's Age is 27, fnlwgt is 160178, Education is Some-college, EducationNum is 10, MaritalStatus is Divorced, Occupation is Adm-clerical"
-    ", what is the prediction? you need to provide this tool with [' Private', 27, 160178,' Some-college', 10, ' Divorced', ' Adm-clerical']."
-    "Remember to put quotes around the word in the list. And the order of elements should be consistent with the order of features in the data you see. "
+    "a list consisting of the value of each feature. The value must be provided in question. For example, the question is: if a person's  Name is Jobs"
+    ", height is 175cm, weight is 65kg, what is the prediction? you need to provide this tool with [' Jobs', 175, 65]. Remember to put quotes around the strings in the list."
+    "And there must be a space before the strings within the quotation marks. Also the order of elements should be consistent with the order of features in the data you see. "
 )
   
 #预测工具的函数
@@ -34,14 +33,20 @@ def forecast(input):
 forecast_tool = Tool(
     name='Forecast',
     func=forecast,
-    description=desc
+    description=forecast_desc
 )
 
 python_tool = PythonREPLTool()
 
-python_tool.description = ("Use this tool when you need to execute python commands and plot. Input should be a valid python command."
-" If you want to see the output of a value, you should print it out with `print(...)`.You can keep reusing this tool until you get the final answer."
+python_tool_desc = (
+    "Use this tool when you need to execute python commands to obtain data or plot charts. Input should be a valid python command."
+    " If you want to see the output of a value, you should print it out with `print(...)`.You can keep reusing this tool until you get the final answer."
+    "For chart plotting, the altair library is mandatory. Instead of saving your chart, display it using the `chart.display()` function rather than `chart.show()`."
+    "You can also add some required interactivity to the chart. When you update or modify the chart, you must make modifications on the original chart,"
+    " which means that the existing parts of the original chart cannot be changed."
 )
+
+python_tool.description = python_tool_desc
 
 def final(input):
     return input

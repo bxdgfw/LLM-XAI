@@ -14,7 +14,7 @@ ebm.fit(X_train, y_train)
 After training EBM , generate the agent to be used. You can optionally provide a description of the data and the meaning of the y-axis to help LLM understand the data and what to do.
 
 ```python
-agent = ebm_agent(llm_gpt4,ebm,df = df,dataset_description = dataset_description,y_axis_description = y_axis_description)
+agent = get_agent(llm_gpt4,ebm,df = df,dataset_description = dataset_description,y_axis_description = y_axis_description)
 ```
 
 ### 1.Global interpretability analysis

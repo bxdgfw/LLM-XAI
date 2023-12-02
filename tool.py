@@ -12,7 +12,7 @@ forecast_desc = (
     ", height is 175cm, weight is 65kg, what is the prediction? you need to provide this tool with [' Jobs', 175, 65]. Remember to put quotes around the strings in the list."
     "And there must be a space before the strings within the quotation marks. Also the order of elements should be consistent with the order of features in the data you see. "
 )
-  
+
 #预测工具的函数
 def forecast(input):
     sample = eval(input)
@@ -47,6 +47,33 @@ python_tool_desc = (
 )
 
 python_tool.description = python_tool_desc
+
+#得到local explain的图工具
+desc = (
+    "use this tool When you need to get the contribution of each feature to the prediction outcome of a sample."
+    "A positive score indicates a positive contribution to the prediction result, otherwise it is a negative contribution. "
+    "The larger the absolute value of the score, the greater the degree of contribution."
+)
+
+def local_exp(input):
+    sample = eval(input)
+    explanation = ebm.explain_local(sample)
+    if isinstance(sample[0], np.ndarray) or isinstance(sample[0], list):
+        ans = f"The feature contribution to prediction results of features in each sample from top to bottom are as follows(The order of features corresponding to these scores is:{explanation.data(0)['names']}):\n"
+        for i, s in enumerate(sample) :
+            scores = [f'{x:.4f}' for x in explanation.data(i)['scores']]  
+            ans += f"     the contribution scores of row {i} in your input is {scores}\n"
+        return ans
+    else:
+        explanation = ebm.explain_local(sample)
+        scores = [f'{x:.4f}' for x in explanation.data(0)['scores']] 
+        return f"the contribution scores is {scores}, and the order of features corresponding to these scores is:{explanation.data(0)['names']}" 
+        
+explanation_tool = Tool(
+    name='Explanation_tool',
+    func=local_exp,
+    description=desc
+)
 
 def final(input):
     return input

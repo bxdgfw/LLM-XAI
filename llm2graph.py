@@ -1,9 +1,7 @@
 #可以根据ebm的某个具体特征的graph进行问答的llmchain
 
 import t2ebm
-from langchain.memory import ConversationBufferMemory 
 from langchain import LLMChain, PromptTemplate
-from langchain.chat_models import ChatOpenAI
 
 
 def llm2graph(   

@@ -1,7 +1,5 @@
 import t2ebm
-from langchain.memory import ConversationBufferMemory 
 from langchain import LLMChain, PromptTemplate
-from langchain.chat_models import ChatOpenAI
 from graph_desc import llm2graph_desc
 
 #得到ebm的每个feature和对应的importance列表

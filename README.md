@@ -45,7 +45,9 @@ agent.run("Visually display the contribution of the term WorkClass to prediction
 
 
 
-The job type feature is a discrete feature. We see that most of the values of this feature have a negative contribution to the prediction results. Most of these values are low education, and the only features with obvious positive contributions are Federal-gov and Self-emp-inc, which means working for the federal government as well as self-employed companies can greatly help people earn over 50K a year.
+The job type feature is a discrete feature. We see that most of the values of this feature have a negative contribution to the prediction results.The only two features with obvious positive contributions are Federal-gov and Self-emp-inc, which means working for the federal government as well as self-employed companies can greatly help people earn over 50K a year.
+
+
 
 ### 2.Local interpretability analysis
 
@@ -60,7 +62,7 @@ agent.run("Use the 2nd row of dataframe data as a sample to predict, and tell me
 > The prediction for the 2nd row of the dataframe is that the person makes less than or equal to 50K a year, with a probability of 0.603. The contribution of each feature to this prediction is as follows: Age: 0.6675, WorkClass: -0.2177, fnlwgt: -0.6502, Education: -0.0384, EducationNum: -0.2961, MaritalStatus: 0.6708, Occupation: 0.6332, Relationship: 1.8473, Race: 0.0311, Gender: -0.5612, CapitalGain: -0.2264, CapitalLoss: -0.0434, HoursPerWeek: 0.0117, NativeCountry: 0.0355. Positive scores indicate a positive contribution to the prediction result, and negative scores indicate a negative contribution. The larger the absolute value of the score, the greater the degree of contribution.
 
 ```python
-agent.run("Please visualize the contribution of the feature previously obtained through the 2rd row of data in df as a sample.")
+agent.run("Please visualize the contribution of the feature previously obtained through the 2nd row of data in df as a sample.")
 ```
 
 <img src="images/2nd_analyze.png">
@@ -88,7 +90,7 @@ agent.run("Use the 3rd row of dataframe data as a sample to predict, and tell me
 > The prediction for the 3rd row of the dataframe is that the person makes over 50K a year, with a probability of 0.6366. The contribution of each feature to this prediction is as follows: Age: -0.1434, WorkClass: 0.0634, fnlwgt: 0.0942, Education: 0.3032, EducationNum: 0.4701, MaritalStatus: 0.6708, Occupation: 0.6332, Relationship: 0.4170, Race: -0.2121, Gender: 0.2788, CapitalGain: -0.2264, CapitalLoss: -0.0434, HoursPerWeek: 0.5017, NativeCountry: 0.0355. Positive scores indicate a positive contribution to the prediction result, and negative scores indicate a negative contribution. The larger the absolute value of the score, the greater the degree of contribution.
 
 ```python
-agent.run("Please visualize the contribution of the feature previously obtained through the 2rd row of data in df as a sample.")
+agent.run("Please visualize the contribution of the feature previously obtained through the 3rd row of data in df as a sample.")
 ```
 
 <img src="images/3rd_analyze.png">

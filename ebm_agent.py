@@ -1,17 +1,11 @@
-from langchain.chat_models import ChatOpenAI
 from langchain.agents import ZeroShotAgent
-from langchain.tools import Tool
-from langchain.agents import Tool, AgentExecutor
+from langchain.agents import  AgentExecutor
 from langchain.chains.llm import LLMChain
 from langchain.memory import ConversationBufferMemory
-from langchain.tools.python.tool import PythonREPLTool
 import markdown  
 from IPython.display import Image, display  
-import numpy as np
-import pandas as pd
 from llm2ebm import feature_importances_to_text
 from tool import get_tools
-from graph_desc import llm2graph_desc
 from prompt import suffix_no_df,suffix_with_df,get_prefix
 
 
@@ -46,7 +40,7 @@ def get_agent(llm,ebm,df = None,dataset_description = None,y_axis_description = 
     global_explanation = global_explanation = ebm.explain_global().data
     
     #获取prompt的prefix部分
-    prefix = get_prefix(feature_importances,dataset_description,y_axis_description)
+    prefix = get_prefix(ebm,feature_importances,dataset_description,y_axis_description)
     
     #获取工具
     tools=get_tools(ebm)

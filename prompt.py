@@ -1,4 +1,13 @@
-def get_prefix(feature_importances,dataset_description,y_axis_description):
+#得到ebm的每个feature和对应的importance列表
+def feature_importances_to_text(ebm):
+    feature_importances = ""
+    for feature_idx, feature_name in enumerate(ebm.feature_names_in_):  
+        feature_importances += (
+            f"{feature_name}: {ebm.term_importances()[feature_idx]:.2f}\n"
+        )
+    return feature_importances
+
+def get_prefix(ebm,feature_importances,dataset_description,y_axis_description):
     feature_importances = feature_importances_to_text(ebm) 
      
     prefix = """You are an expert statistician and data scientist.
@@ -65,28 +74,29 @@ def get_prefix(feature_importances,dataset_description,y_axis_description):
     #    Your Final Answer must start with the entire executed code, and then print the image information in the form of a string in the format of '![image description](image address, which can be a local link)'.
     #    You must save the generated image through code before you show it. In other words,You can't use 'plt.show()' 
     prefix = prefix + suffix
-    
-    suffix_no_df = """The Action must contain only the name of one tool, no extra words needed to form a sentence.
-    
-    Begin!
-    
-    {chat_history}
-    Question: {input}
-    {agent_scratchpad}"""
-    
-    suffix_with_df = """
-    The Action must contain only the name of one tool, no extra words needed to form a sentence.
-    If you find after Thought that you know the answer that can eventually be returned, you must immediately give the result in the form of Final Answer: the final answer to the original input question.
-    Because the results of tools cannot be seen by users. So if the results need to be displayed to the user, please use the results of the observation as part of the final answer, rather than just telling the user the information they need are shown above.
-    
-    Additionally, when using the tool Python_REPL, you can execute code to work with a pandas dataframe. The name of the dataframe is `df`.
-    If you want to get the data in df, remember to use the 'print()' function. For example, if you want to view the data with row index 3, you need to execute 'print(df.iloc[3])'
-    
-    This is the result of `print(df.head())`:
-    {df_head}
-    
-    Begin!
-    
-    {chat_history}
-    Question: {input}
-    {agent_scratchpad}"""
+    return prefix
+
+suffix_no_df = """The Action must contain only the name of one tool, no extra words needed to form a sentence.
+
+Begin!
+
+{chat_history}
+Question: {input}
+{agent_scratchpad}"""
+
+suffix_with_df = """
+The Action must contain only the name of one tool, no extra words needed to form a sentence.
+If you find after Thought that you know the answer that can eventually be returned, you must immediately give the result in the form of Final Answer: the final answer to the original input question.
+Because the results of tools cannot be seen by users. So if the results need to be displayed to the user, please use the results of the observation as part of the final answer, rather than just telling the user the information they need are shown above.
+
+Additionally, when using the tool Python_REPL, you can execute code to work with a pandas dataframe. The name of the dataframe is `df`.
+If you want to get the data in df, remember to use the 'print()' function. For example, if you want to view the data with row index 3, you need to execute 'print(df.iloc[3])'. Don't use 'df' directly in the input of tools other than the tool Python_REPL.
+
+This is the result of `print(df.head())`:
+{df_head}
+
+Begin!
+
+{chat_history}
+Question: {input}
+{agent_scratchpad}"""

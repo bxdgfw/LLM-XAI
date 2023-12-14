@@ -4,7 +4,7 @@ We can generate an agent to isnteract with a trained Explainable Boosting Machin
 
 ## example
 
-We have trained an `ExplainableBoostingClassifier` on the [Adult]([Adult - UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/2/adult)) in UCI Machine Learning Database. This is a data record about the annual income of individuals in many European and American countries. The task type is two-class classification, that is, based on the basic information of the individual as a feature, predict whether the annual income is greater than 50K.
+We have trained an `ExplainableBoostingClassifier` on the [Adult](https://archive.ics.uci.edu/dataset/2/adult) in UCI Machine Learning Database. This is a data record about the annual income of individuals in many European and American countries. The task type is two-class classification, that is, based on the basic information of the individual as a feature, predict whether the annual income is greater than 50K.
 
 ```python
 ebm = ExplainableBoostingClassifier(feature_names=feature_names)

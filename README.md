@@ -1,6 +1,16 @@
 # LLM-XAI
 
-We can generate an agent to isnteract with a trained Explainable Boosting Machine (EBM) in natural language, allowing it to answer questions, plot charts or make predictions based on the relevant informatison of the EBM.
+We can generate an agent to interact with a trained Explainable Boosting Machine (EBM) in natural language, allowing it to answer questions, plot charts or make predictions based on the relevant information of the EBM.
+
+**features:**
+
+- Summarize the model or data to allow users to initially understand the model and data.
+
+- Analyze and visualize a specific feature to obtain the impact of different values of the feature.
+
+- Predict the results of certain specific data samples.
+
+- Analyze the prediction results of a sample to obtain the impact of each feature on the prediction.
 
 ## example
 
